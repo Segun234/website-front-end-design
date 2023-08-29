@@ -1,0 +1,84 @@
+Here are some code snippets for creating a simple note-taking app in Python:
+
+1. Basic command-line note-taking app:
+```python
+import datetime
+
+def create_note():
+    note = input("Enter your note: ")
+    timestamp = datetime.datetime.now()
+    note_entry = f"{timestamp}: {note}\n"
+
+    with open("notes.txt", "a") as notes_file:
+        notes_file.write(note_entry)
+
+def read_notes():
+    with open("notes.txt", "r") as notes_file:
+        notes = notes_file.readlines()
+        for note in notes:
+            print(note)
+
+def main():
+    while True:
+        print("1. Create Note")
+        print("2. Read Notes")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            create_note()
+        elif choice == "2":
+            read_notes()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please try again.\n")
+
+if __name__ == "__main__":
+    main()
+```
+
+2. Note-taking app with GUI using tkinter:
+```python
+import datetime
+import tkinter as tk
+
+def create_note():
+    note = entry.get()
+    timestamp = datetime.datetime.now()
+    note_entry = f"{timestamp}: {note}\n"
+
+    with open("notes.txt", "a") as notes_file:
+        notes_file.write(note_entry)
+
+    entry.delete(0, tk.END)  # Clear the text entry
+
+def read_notes():
+    text.delete(1.0, tk.END)  # Clear the text widget
+    with open("notes.txt", "r") as notes_file:
+        notes = notes_file.read()
+        text.insert(tk.END, notes)
+
+root = tk.Tk()
+root.title("Note Taking App")
+
+label = tk.Label(root, text="Enter your note:")
+label.pack()
+
+entry = tk.Entry(root)
+entry.pack()
+
+create_button = tk.Button(root, text="Create Note", command=create_note)
+create_button.pack()
+
+read_button = tk.Button(root, text="Read Notes", command=read_notes)
+read_button.pack()
+
+text = tk.Text(root)
+text.pack()
+
+root.mainloop()
+```
+
+Note: In both examples, the notes are stored in a "notes.txt" file in the same directory as the Python script.
